@@ -31,9 +31,18 @@ app.get("*", (req, res) => {
 });
 
 mongoose.connect(
-  //left off here
-)
+  process.env.MONGODB_URI || "mongodb://localhost/googlebooks", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
 
 db.once('open', () => {
-  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
+  app.listen(PORT, () => {
+    console.log(`🌍 Now listening on localhost:${PORT}`);
+    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  });
+  
 });
