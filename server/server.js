@@ -16,6 +16,7 @@ const server = new ApolloServer({
   typeDefs,
   context: authMiddleware
 });
+await server.start();
 server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: true }));
@@ -40,7 +41,7 @@ mongoose.connect(
 );
 
 db.once('open', () => {
-  app.listen(PORT, () => {
+  app.listen(process.env.PORT || PORT, () => {
     console.log(`🌍 Now listening on localhost:${PORT}`);
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });
