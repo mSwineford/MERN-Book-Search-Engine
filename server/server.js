@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 });
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/books", {
+  process.env.MONGODB_URI || "mongodb://localhost/booksDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
